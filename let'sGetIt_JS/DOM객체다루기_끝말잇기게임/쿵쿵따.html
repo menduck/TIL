@@ -27,26 +27,47 @@
       let newWord;
 
       const onClickButton=()=>{
+        const order = parseInt($order.textContent);
 
 
       
-      if(!word || (word[word.length-1]===newWord[0] && word.length ===3)){
-      word = newWord;
-      $word.textContent = word;
-      const order = parseInt($order.textContent);
-      if(order+1>number){
-        $order.textContent = 1;
-      }else{
-        $order.textContent = order+1;
+      if(!word){ //제시어가 비워져 있다.
+        if(newWord.length === 3){// 3글자인가?
+          word = newWord;
+          $word.textContent = word;
+          
+          if(order+1>number){ //현재 순서에 +1 이 총 인원보다 큰가?
+            $order.textContent = 1;
+          } else{ // 총 인원보다 현재 순서가 작다.
+            $order.textContent = order+1;
+          }
+        }else{ //3글자가 아니다.
+          alert("제시어는 3글자이어야 합니다! 1번째 참가자 탈락입니다!")
+        }
+
+      }else{ //제시어가 비워있지 않다.
+        if(word[word.length-1] === newWord[0] && newWord.length ===3){ //올바르고 3글자
+          word = newWord;
+          $word.textContent = word;
+
+          if(order+1>number){ //현재 순서에 +1 이 총 인원보다 큰가?
+            $order.textContent = 1;
+          } else{ // 총 인원보다 현재 순서가 작다.
+            $order.textContent = order+1;
+          }
+
+        } else{ //올바르지 않고 세글자도 아님.
+          alert(`${order}번째 참가자가 패배했습니다.`)
+
+        }
+
       }
 
-      } else{
-        alert("단어가 올바르지 않습니다!")
-      }
       $input.value="";
       $input.focus();
 
-      } 
+
+      } //onClickButton의 끝 
 
       
 
@@ -61,7 +82,7 @@
 
 
       
-    } else{
+    } else{ //게임 시작 안한다 했을때
     window.close();
     };
 
