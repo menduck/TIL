@@ -1,0 +1,44 @@
+body{
+  background-color:gainsboro
+}
+
+h1 {
+  font-size: 50px;
+  color: darkgreen;
+}
+
+p {
+  text-align: center;
+  color: dimgrey;
+}
+
+p.center{
+  text-align: right;
+  color: brown;
+}
+
+#center{
+  text-align: left;
+  color: deeppink;
+}
+
+#subtilte,#menu{
+  text-align : center;
+  color : red
+
+}
+p b{
+  color: black;
+}
+
+h2{
+  color: darkgoldenrod  ;
+}
+
+.text{
+  color: blueviolet ;
+}
+
+#text{
+  color: crimson ;
+}
