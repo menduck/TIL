@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>나랑 끝말잇기 할 사람!</title>
+  </head>
+  <body>
+    <div><span id="order">1</span>번째 사람! 단어 말해주세요~</div>
+    <div>제시어 : <span id="word"></span></div>
+    <input type="text" />
+    <button>전송</button>
+
+    <script>
+      const $input = document.querySelector("input");
+      const $button = document.querySelector("button");
+      const $word = document.querySelector("#word");
+      const $order = document.querySelector("#order");
+
+      const number = parseInt(prompt("게임 총 인원을 입력해주세요."));
+      let word;
+      let newWord;
+
+      const onclickButton = () => {
+        //제시어가 비워져 있는가?
+        if (!word || word[word.length - 1] === newWord[0]) {
+          //예
+          word = newWord;
+          $word.textContent = word;
+
+          const order = parseInt($order.textContent);
+          if (order + 1 > number) {
+            $order.textContent = 1;
+          } else {
+            $order.textContent = order + 1;
+          }
+          $input.value = "";
+          $input.focus();
+        } else {
+          //아니요
+
+          alert("단어가 맞지 않습니다! 당신은 졌습니다!");
+        }
+      };
+
+      const onInput = () => {
+        newWord = event.target.value;
+      };
+
+      $input.addEventListener("input", onInput);
+      $button.addEventListener("click", onclickButton);
+    </script>
+  </body>
+</html>
