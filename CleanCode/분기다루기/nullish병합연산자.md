@@ -15,6 +15,7 @@ function helloWorld(message) {
 }
 ```
 - 만약 0을 입력했을때 Hello! 0World를 기대했지만 0은 false임으로 Hello! World가 반환된다.
+
 - 해결 코드1
 ```js
 function helloWorld(message) {
@@ -23,6 +24,11 @@ function helloWorld(message) {
 ```
 - 해결 코드 1의 문제점 : early return을 할때 헷갈랴 실수할 가능성이 크다.
 - 해결 방안 : default parameter쓰면 됨.
+```js
+function helloWorld(message = 'World') {
+  return 'Hello!' + message 
+}
+```
 
 ## 제약 사항
 - OR 연산자 AND연산자는 ??연산자를 혼합해서 쓰지 못한다.
