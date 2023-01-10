@@ -90,3 +90,27 @@ else :
   for num in number_list:
     sum += num
   print(sum)
+
+# 코드 풀이
+# number_list에 자리수를 저장할 필요 없이 바로 누적해서 더해주면 된다.
+
+number = int(input('양의 정수를 입력하세요 > '))
+
+if number <= 0 :
+  print(-1)
+else : 
+  result = 0
+  while number > 0 :
+    result += number%10
+    number //= 10
+
+  print(result)
+
+# 반복가능한 문자열 특징 활용해서 풀기
+
+number = input('양의 정수를 입력하세요 > ') # 문자열로 받아
+
+result = 0
+for i in number : # 문자열을 하나씩 순회한다.
+  result += int(i) # 정수형으로 바꾸어 result에 누적합 시킨다.
+print(result)
