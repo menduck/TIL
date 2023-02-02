@@ -42,15 +42,42 @@ for i,j,w,z in c:
 print(area - common_area)
 ```
 '''
+# solution
+
 import sys
-
-area = [[0] * 100 for _ in range(101)]
+total_area_point = set() # 중복방지를 위해 set으로 설정
 for _ in range(4):
-  x1,y1,x2,y2 = map(int, sys.stdin.readline().split())
+    x1,y1,x2,y2 = map(int, sys.stdin.readline().strip().split())
+    for x in range(x1, x2):
+        for y in range(y1,y2):
+            total_area_point.add((x,y)) # x,y 좌표를 set에 추가한다.
+print(len(total_area_point)) # 중복이 제거된 좌표 개수를 출력한다.
 
-  for i in range(x1,x2):
-    for j in range(y1,y2):
-        area[i][j] = 1
+'''
+# 문제 풀이
+- 한 칸은 4개의 좌표로 이뤄져 있다.
+- 계산을 용이하기 위해 한 칸의 4개의 좌표 중 하나의 좌표를 기준점으로 잡고 개수를 셌다. 
+  - 나의 기준 좌표(x,y)는 왼쪽 아래 좌표이다.
 
-result = sum(area,[])
-print(sum(result))
+  - 만약 입력값이 1 2 4 4 일때 
+
+  - x1 = 1, y1 = 2, x2 = 4, y2 = 4 이다.
+
+  - 기준 좌표는
+    (1,2) (2,2) (3,2)
+    (1,3) (2,3) (3,3)
+    
+    넓이는 이 좌표들의 개수인 6이다.
+
+  - x의 범위는 1 2 3
+    y의 범위는 2 3
+
+  - 이를 일반화 했을때 
+    x의 범위는 range(x1, x2)
+    y의 범위는 range(y1, y2)
+
+- 이렇게 네개의 직사각형 좌표들을 받고, set을 (x,y)을 넣어 중복되는 좌표값을 제거한다.
+
+- 중복되지 않는 좌표값이 들어있는 set 집합 요소의 길이를 출력한다. 
+
+'''
