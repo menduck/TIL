@@ -1,0 +1,172 @@
+<mxfile host="65bd71144e">
+    <diagram id="lqOAiJOzN5P3NEtirV-o" name="Page-1">
+        <mxGraphModel dx="838" dy="604" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="6" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="2" target="5">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="시작" style="ellipse;shape=doubleEllipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="50" y="80" width="60" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="계산기 순서도" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="30" y="10" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="5" target="7">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="숫자1를 저장할 변수를 만든다." style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="180" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="7" target="9">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="연산자를 저장할 변수를 만든다." style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="270" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-20" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="9" target="CLaBFEA3RTX3xJBHNkdm-19">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="숫자2를 저장할 변수를 만든다." style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="350" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-19" value="대기" style="shape=ext;double=1;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="45" y="450" width="70" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-23" value="" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="CLaBFEA3RTX3xJBHNkdm-21" target="CLaBFEA3RTX3xJBHNkdm-22">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="305.5182537320386" y="195.060845773462" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-21" value="숫자 버튼 클릭" style="shape=ext;double=1;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="260" y="60" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-22" value="" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="180" y="190" width="240" height="240" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-24" value="대기" style="shape=ext;double=1;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="260" y="480" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-26" value="" style="edgeStyle=none;html=1;" edge="1" source="CLaBFEA3RTX3xJBHNkdm-27" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="570" y="190" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-27" value="연산자 버튼 클릭" style="shape=ext;double=1;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="530" y="70" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-63" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=14;" edge="1" parent="1" source="CLaBFEA3RTX3xJBHNkdm-32" target="CLaBFEA3RTX3xJBHNkdm-61">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-32" value="= 버튼 클릭" style="shape=ext;double=1;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="670" y="450" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-37" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="CLaBFEA3RTX3xJBHNkdm-35" target="CLaBFEA3RTX3xJBHNkdm-36">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-35" value="숫자1과 숫자2를 연산자 변수를 이용해 계산한다." style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="530" y="620" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-39" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="CLaBFEA3RTX3xJBHNkdm-36" target="CLaBFEA3RTX3xJBHNkdm-38">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-36" value="계산한 값을 화면에 출력한다." style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="530" y="720" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-38" value="종료" style="ellipse;shape=doubleEllipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="810" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-41" value="&lt;span style=&quot;font-size: 12px ; font-weight: 400&quot;&gt;숫자를 변수에 저장한다.&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="250" y="190" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-47" value="" style="edgeStyle=none;html=1;fontSize=14;exitX=0.01;exitY=0.491;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="CLaBFEA3RTX3xJBHNkdm-44" target="CLaBFEA3RTX3xJBHNkdm-46">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="243" y="310" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-44" value="operator가 비워있는가?" style="html=1;whiteSpace=wrap;aspect=fixed;shape=isoRectangle;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="235.82999999999998" y="220" width="128.34" height="77" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-46" value="num1에 저장" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="180.00499999999997" y="320" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-48" value="" style="edgeStyle=none;html=1;fontSize=14;exitX=1.002;exitY=0.494;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="CLaBFEA3RTX3xJBHNkdm-44" target="CLaBFEA3RTX3xJBHNkdm-49">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="362.82669999999996" y="264.3699999999999" as="sourcePoint"/>
+                        <mxPoint x="363" y="310" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-49" value="num2에 저장" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="305.005" y="320" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-52" value="" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;fontSize=14;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="240.00499999999988" y="380" as="sourcePoint"/>
+                        <mxPoint x="300" y="480" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="240" y="440"/>
+                            <mxPoint x="300" y="440"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-53" value="" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;fontSize=14;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="CLaBFEA3RTX3xJBHNkdm-49">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="250.00499999999988" y="390" as="sourcePoint"/>
+                        <mxPoint x="300" y="480" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="365" y="440"/>
+                            <mxPoint x="300" y="440"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-56" value="" style="edgeStyle=none;html=1;fontSize=14;exitX=0.013;exitY=0.479;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="CLaBFEA3RTX3xJBHNkdm-54" target="CLaBFEA3RTX3xJBHNkdm-55">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-58" value="" style="edgeStyle=none;html=1;fontSize=14;exitX=0.983;exitY=0.463;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="CLaBFEA3RTX3xJBHNkdm-54" target="CLaBFEA3RTX3xJBHNkdm-57">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-54" value="&lt;span style=&quot;font-size: 12px&quot;&gt;num1값이 있는가&lt;/span&gt;" style="html=1;whiteSpace=wrap;aspect=fixed;shape=isoRectangle;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="495" y="190" width="150" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-60" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontSize=14;" edge="1" parent="1" source="CLaBFEA3RTX3xJBHNkdm-55" target="CLaBFEA3RTX3xJBHNkdm-59">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-55" value="연산자를 변수에 저장" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="440" y="320" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-57" value="경고를 준다." style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="580" y="320" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-59" value="대기" style="shape=ext;double=1;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="460" y="410" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-65" value="" style="edgeStyle=none;html=1;fontSize=14;" edge="1" parent="1" target="CLaBFEA3RTX3xJBHNkdm-64">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="770" y="575" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-61" value="NUM2값이 있는가" style="html=1;whiteSpace=wrap;aspect=fixed;shape=isoRectangle;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="651.67" y="540" width="116.67" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-62" value="" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;fontSize=14;exitX=0.015;exitY=0.504;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="CLaBFEA3RTX3xJBHNkdm-61" target="CLaBFEA3RTX3xJBHNkdm-35">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="660" y="620" as="sourcePoint"/>
+                        <mxPoint x="710" y="570" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="CLaBFEA3RTX3xJBHNkdm-64" value="경고" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="740" y="720" width="60" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="LAnXwu2OKFGaN4_x5YsM" name="Page-2">
+        <mxGraphModel dx="796" dy="574" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="QITAi4y2REGMsOMiYKQt-0"/>
+                <mxCell id="QITAi4y2REGMsOMiYKQt-1" parent="QITAi4y2REGMsOMiYKQt-0"/>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

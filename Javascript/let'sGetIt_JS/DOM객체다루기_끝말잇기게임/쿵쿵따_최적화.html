@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>쿵쿵따! 쿵쿵따!</title>
+</head>
+<body>
+  <div><span id="order">1</span>번째 참가자! 제시어를 입력해주세요.</div>
+  <div>제시어는 <span id="word"></span>입니다.</div>
+  <input type="text">
+  <button>입력</button>
+</body>
+<script>
+  const number = parseInt(prompt("게임 참가할 인원 수를 입력하세요!"));
+  if(number){
+    const $order = document.querySelector('#order');
+    const $word = document.querySelector('#word');
+    const $input = document.querySelector('input');
+    const $button = document.querySelector('button');
+    let word;
+    let newWord;
+    
+    const onClickButton=()=>{
+      
+      const order = parseInt($order.textContent);
+      if(!word  ||(word[word.length-1]===newWord[0] && newWord.length ===3)){
+        
+        word = newWord;
+        $word.textContent = word;
+        
+        if(order+1>number){
+          $order.textContent = 1;
+        } else{
+          $order.textContent = order+1;
+        }
+      }else{
+        alert(`${order}번째 참가자가 패배했습니다.`)
+      }
+      $input.value='';
+      $input.focus();
+    }
+
+    const onInput = (event)=>{
+      newWord = event.target.value;
+    }
+
+
+    $input.addEventListener('input',onInput);
+    $button.addEventListener('click',onClickButton);
+  }
+
+</script>
+
+</html>
