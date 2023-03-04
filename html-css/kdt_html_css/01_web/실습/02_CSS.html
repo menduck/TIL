@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      color:red
+    }
+
+    h2 {
+      color: aqua;
+    }
+
+    h3,h4 {
+      color: blueviolet;
+    }
+
+    .green {
+      color: green;
+    }
+
+    #yellow {
+      color: yellow;
+    }
+
+    /* 자식 결합자 */
+    .green > span {
+      font-size: 50px;
+    }
+
+    /* 자손 결합자 */
+    .darkblue li {
+      font-size: 20px;
+      color: darkslateblue;
+    }
+    
+  </style>
+</head>
+<body>
+  <h1 class="green">Heading</h1>
+  <h2>선택자 연습</h2>
+  <h3>Hello</h3>
+  <h4>어서오세요</h4>
+  <p id="yellow">디저트 목록</p>
+  <ul class="darkblue">
+    <li>쿠키</li>
+    <li>도넛</li>
+    <li>케이크</li>
+      <ol>
+        <li>딸기케이크</li>
+        <li>초코케이크</li>
+        <li>치즈케이크</li>
+      </ol>
+  </ul>
+  <p class="green"><span>디저트</span>는 정말 맛있습니다.</p>
+</body>
+</html>
