@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  h1,h2,p,div {
+    border: 1px solid purple;
+  }
+
+  span,a,img {
+    border: 1px solid orangered;
+  }
+
+  /* 수평방향에 패딩이 적용이되지만 다른 요소를 밀어내진 않음 */
+  a {
+    padding-top: 50px;
+  }
+</style>
+<body>
+  <h1>Block 요소</h1>
+  <h2>상에서 하로 쌓임</h2>
+  <p>p태그도 대표적인 block태그</p>
+  <div>
+    <p>block요소는 기본으로 부모 요소 너비의 100%를 차지하고, 자식 콘텐츠의 최대 높이를 취함 </p>
+    <p>block 요소의 총 너비/높이 = content(좌우/상하) + padding(좌우/상하) + border(좌우/상하)</p>
+    <p>block요소는 서로 margins로 구분</p>
+  </div>
+  <hr>
+  <h1>Inline 요소</h1>
+  <p>좌에서 우로 쌓임</p>
+  <p>inline태그는 span태그, <a href="">a태그</a>, img태그</p>
+  <p>inline태그는 <span>자기 콘텐츠의 너비와 높이만 차지함</span> 그래서 inline요소는 width나 hight 속성을 지정할 수 없음</p>
+  <p><img src="" alt="img태그는 예외로 width나 hight 속성을 지정할 수 있음"></p>
+</body>
+</html>

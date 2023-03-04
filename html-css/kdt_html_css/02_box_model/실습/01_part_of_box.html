@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1{
+      border-style: solid;
+      border-width: 2px;
+      border-color: red;
+
+      /* border 방향별로 설정 가능 */
+      border-bottom-color: black;
+
+      margin-top: 50px;
+
+      /* 박스의 크기가 아니라 컨텐츠의 너비가 300px */
+      width: 300px;
+      /* 왼쪽으로 패딩을 50px을 주면 박스의 너비가 350px이 됨 => 해결방법은 실습 02파일 참고 */
+      padding-left: 50px;
+    }
+
+    /* 정렬 */
+    .box2 {
+      width: 300px;
+      /* 축약표현(shorthand) - 작성 순서 무관 */
+      border: 1px solid black;
+
+      /* 4방향 전부 값 설정 */
+      /* margin: 25px; */
+
+      /* 박스 가운데 정렬 - 첫번째 값은 상하, 두번째 값은 좌우 */
+      /* margin: 25px auto; */
+      
+      /* 박스 오른쪽 정렬 */
+      /* margin-right: 0; */
+      margin-left: auto;
+      
+    }
+  </style>
+</head>
+<body>
+  <div class="box1">box1</div>
+  <div class="box2">box2</div>
+
+</body>
+</html>
