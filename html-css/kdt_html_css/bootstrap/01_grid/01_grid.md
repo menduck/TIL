@@ -8,7 +8,7 @@
   - 다양한 레이아웃을 조정할 수 있음
 
 ## Grid system 핵심 클래스
-👩‍💻 [grid 실습파일](html-css\kdt_html_css\bootstrap\01_grid\실습\01_grid.html)
+👩‍💻 [grid 실습파일](../01_grid/%EC%8B%A4%EC%8A%B5/01_grid.html)
 
 <p align="center">
 <img src = 'https://user-images.githubusercontent.com/39366835/223460990-0489e650-4695-436e-850f-ede33e57a6ac.PNG'>
