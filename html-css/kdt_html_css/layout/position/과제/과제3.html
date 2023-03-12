@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      margin: 25px auto;
+      width: 400px;
+      height: 500px;
+      position: relative;
+    }
+
+    .product {
+      height: 80%;
+    }
+    .bg-img{
+      width: 100%;
+      height: 100%;
+    }
+
+    .bookmark-position {
+      position: absolute;
+      top: 0;
+      left: 20px;
+    }
+
+    .bookmark {
+      width: 15%;
+    }
+
+    .season {
+      width: 30%;
+    }
+
+    .season-position {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    .info {
+      line-height: 0.1rem;
+    }
+    
+    .info>.companyname, span  {
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box product">
+      <img src="./item01.png" class="bg-img" alt="냉장고 제품 사진">
+      <img src="./bookmark.png" class="bookmark bookmark-position" alt="북마크">
+      <img src="./season.png" class="season season-position" alt="시즌위크">
+    
+    </div>
+    <div class="box info">
+      <p class="companyname">LG전자</p>
+      <h2 class="productname">LG 디오스 노크온</h2>
+      <h2 class="price">1,700,000</h2>
+      <p class="starRanking">★4.8 <span>리뷰 300</span></p>
+
+    </div>
+  </div>
+</body>
+</html>
