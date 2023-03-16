@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1 class="title heading">DOM 선택</h1>
+  <a href="https://www.google.com">google</a>
+  <p class="text">content1</p>
+  <p class="text">content2</p>
+  <p class="text">content3</p>
+  <ul>
+    <li>list</li>
+    <li>list</li>
+  </ul>
+
+  <script>
+    // 속성 조작
+    // 1. 클래스 속성 조작
+    const h1Tag = document.querySelector('h1')    
+    console.log(h1Tag.classList)
+    /*
+    DOMTokenList(2)
+    0 : "title"
+    1 : "heading"
+    */
+
+   // 클래스 값 추가
+    h1Tag.classList.add('test')
+    console.log(h1Tag.classList)
+    /*
+    DOMTokenList(2)
+    0 : "title"
+    1 : "heading"
+    2 : "test"
+    */
+    
+    // 2. 일반 속성 조작
+    const aTag = document.querySelector('a')
+
+    // 선택하고자 하는 속성 선택
+    let aTagHref = aTag.getAttribute('href') 
+    console.log(aTagHref)// https://www.google.com
+
+    // 속성 수정
+    aTag.setAttribute('href','https://www.naver.com')
+    console.log(aTag.getAttribute('href')) // https://www.naver.com
+    
+    // 속성 삭제
+    aTag.removeAttribute('href')
+    console.log(aTag.getAttribute('href')) // null
+
+    // text 속성 선택
+    const pTag = document.querySelector('.text')
+    console.log(pTag.getAttribute('class')) // text
+  </script>
+</body>
+</html>

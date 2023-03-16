@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1 class="title heading">DOM 선택</h1>
+  <a href="https://www.google.com">google</a>
+  <p class="text">content1</p>
+  <p class="text">content2</p>
+  <p class="text">content3</p>
+  <ul>
+    <li>list</li>
+    <li>list</li>
+  </ul>
+
+  <script>
+    // console에 요소가 선택되었는지 보기위해 모두 출력해서 확인했음
+    
+    // 클래스가 title인 요소 선택
+    console.log(document.querySelector('.title'))
+
+    // 클래스가 text인 요소 선택
+    console.log(document.querySelector('.text'))
+    // 클래스가 text인 요소가 여러 개일때 처음 만나는 class 하나만 선택한다.
+    
+    // 클래스가 text인 모든 요소 선택
+    console.log(document.querySelectorAll('.text'))
+    // Nodelist에 배열로 담김 => 반복문으로 활용 가능
+
+    // 리스트인 요소 모두 선택
+    console.log(document.querySelectorAll('ul > li'))
+    
+  </script>
+</body>
+</html>

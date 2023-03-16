@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div></div>
+  <script>
+    // 1. 생성
+    const h1Tag = document.createElement('h1')
+    h1Tag.textContent = '제목'
+    // 여기까지 실행했을때 왜 body에서 안보일까?
+    // 생성까지 해놓고 body에 추가하지 않았기 때문
+
+    // 2. 추가
+    // 추가할 부모를 먼저 선택
+
+    // div 안에 h1 태그 추가하기
+    const divTag = document.querySelector('div')
+    divTag.appendChild(h1Tag)
+
+    // 3. 삭제
+
+    // div안에 h1 태그 삭제하기
+    divTag.removeChild(h1Tag)
+
+    // div를 삭제하기
+    document.querySelector('body').removeChild(divTag)
+  </script>
+</body>
+</html>
