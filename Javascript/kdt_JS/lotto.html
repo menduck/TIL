@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: flex;
+        margin-top: 20px;
+        justify-content: space-between;
+      }
+
+      .box {
+        width: 100px;
+        height: 100px;
+        border-radius: 100%;
+        border: 1px solid black;
+        text-align: center;
+        line-height: 100px;
+        font-size: xx-large;
+      }
+
+      .winner-color {
+        background-color: lightgreen;
+      }
+
+      #btn {
+        margin: auto;
+        display: block;
+      }
+
+      .text {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="text">로또 추천 번호</h1>
+    <button id="btn">생성</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script>
+      // 1. 필요한 모든 요소 선택
+      const h1Tag = document.querySelector("h1");
+      const btn = document.querySelector("#btn");
+      const divTag = document.querySelector("div");
+
+      // 2. 버튼 요소에 이벤트 핸들러를 부착
+      btn.addEventListener("click", (event) => {
+        // 2.1 1부터 45까지의 값이 필요
+        const numbers = _.range(1, 46);
+        // console.log(numbers)
+
+        // 2.2 45개의 요소가 있는 배열에서 6개 번호 추출
+        // 3-2. 1등 ~ 꽝 결과값 내기
+        const sixNumbers = _.sampleSize(numbers, 6);
+        sixNumbers.sort((a, b) => a - b);
+        // console.log(sixNumbers)
+
+        // 6개의 div 요소를 담을 div 요소 생성
+        const divTag = document.createElement("div");
+        divTag.classList.add("container");
+        document.body.appendChild(divTag);
+
+        // 추출한 번호 배열을 반복하면서 div요소를 생성
+        sixNumbers.forEach((number) => {
+          const newDivTag = document.createElement("div");
+          newDivTag.textContent = number;
+          newDivTag.classList.add("box");
+          divTag.appendChild(newDivTag);
+        });
+
+        let ranking = "";
+        const lottoCount = findMatch(sixNumbers, winningNumber, bonusNumber);
+        if (lottoCount === 0) {
+          ranking = "꽝";
+        } else {
+          ranking = `${lottoCount}등`;
+        }
+        const winnerDivTag = document.createElement("div");
+        winnerDivTag.textContent = ranking;
+        winnerDivTag.classList.add("box", "winner-color");
+        divTag.appendChild(winnerDivTag);
+      });
+
+      // 당첨번호 확인 : 당첨번호 array 값으로 놓고, if문으로 생성번호랑 당첨번호랑 확인하기!
+      // 1등 : 6개 일치
+      // 2등 : 5개 번호 일치, 보너스 번호 일치
+      // 3등 : 5개 번호 일치
+      // 4등 : 4개 일치
+      // 5등 : 3개 일치
+
+      const winningNumber = [11, 23, 25, 30, 32, 40];
+      const bonusNumber = [42];
+
+      // 3. 당첨번호 비교할 함수 만들어놓기
+      function findMatch(sixNumbers, winningNumber, bonusNumber) {
+        let isMatch = sixNumbers.filter((nums) =>
+          winningNumber.includes(nums)
+        ).length;
+
+        if (isMatch === 6) {
+          return 1;
+        }
+
+        // 3-1. 2등 3등 판별
+        if (isMatch === 5) {
+          // 2등
+          if (sixNumbers.includes(bonusNumber)) {
+            return 2;
+            // 3등
+          } else {
+            return 3;
+          }
+        }
+        if (isMatch === 4) {
+          return 4;
+        }
+        if (isMatch === 3) {
+          return 5;
+        } else {
+          return 0;
+        }
+      }
+    </script>
+  </body>
+</html>
