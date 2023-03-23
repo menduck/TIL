@@ -1,0 +1,7 @@
+{% extends 'articles/base.html' %}
+{% block content %}
+  <form action="/catch/" method="GET" class="d-flex mt-3" >
+    <input type="text" class="form-control border border-info w-50 ms-5" name="message">
+    <button type="submit" class="btn btn-outline-info ms-3">Throw</button>
+  </form>
+{% endblock content %}
