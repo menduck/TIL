@@ -1,0 +1,8 @@
+{% extends 'articles/base.html' %}
+{% block content %}
+  <form action="/lotto/" class="container mt-5 d-flex justify-content-center ">
+      <input type="number" id="number" placeholder="로또 생성 수"class="form-control w-50" name="quantity">
+      <button type="submit" class="btn btn-info ms-3">구입하기</button>
+  </form>
+
+{% endblock content %}

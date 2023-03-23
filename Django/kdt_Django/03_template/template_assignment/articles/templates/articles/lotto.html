@@ -1,0 +1,28 @@
+{% extends 'articles/base.html' %}
+{% block style %}
+  <style>
+    
+    .box {
+      width: 10rem;
+      height: 10rem;
+      border-radius: 100%;
+      border: 1px solid black;
+      text-align: center;
+      line-height: 10rem;
+      font-size: xx-large;
+    }
+  </style>
+{% endblock style %}
+{% block content %}
+  <h2 class="text-center mt-5">{{lotto_quantity}}장을 구입하셨습니다.</h2>
+  {% for lotto_numbers in lotto_list %}
+  <div class="container d-flex justify-content-around my-5">
+      {% for lotto_number in lotto_numbers %}
+      <div class="box">{{lotto_number}}</div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+    <form action="/lotto-create/" class="text-end me-5">
+      <button type="submit" class="btn btn-info">뒤로 가기</button>
+    </form>
+{% endblock content %}
