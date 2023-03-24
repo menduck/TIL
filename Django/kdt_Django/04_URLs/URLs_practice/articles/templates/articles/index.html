@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>article의 메인 페이지</h1>
+  {% comment %} 
+  <a href="/articles/search/">SEARCH 바로가기</a> 
+  {% endcomment %}
+  <a href="{% url 'articles:search' %}">SEARCH 바로가기</a>
+  <a href="{% url 'articles:detail' 5 %}">게시글 5번 바로가기</a>
+  <a href="{% url 'pages:index' %}">두번째 페이지로 바로가기</a>
+
+  
+{% endblock content %}
