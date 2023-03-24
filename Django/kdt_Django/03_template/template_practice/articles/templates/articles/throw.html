@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Throw</h1>
+  {% comment %} 목적지는 catch 페이지 {% endcomment %}
+  <form action="/catch/" method="GET">
+    <input type="text" name="message">
+    <input type="submit">
+  </form>
+{% endblock content %}
