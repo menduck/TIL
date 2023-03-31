@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2 class="m-4">{{ article.note }}</h2>
+    <ul>
+      <li class="mb-2">{{ article.category }}</li>
+      <li class="mb-2">{{ article.amount }}</li>
+      <li class="mb-2">{{ article.date }}</li>
+      {% if article.description != '' %}
+        <li class="mb-2">{{ article.description }}</li>
+      {% endif %}
+    </ul>
+
+    <a class="btn btn-outline-primary" role="button" href="{% url 'accountbooks:edit' article.pk %}">수정하기</a>
+    <a class="btn btn-outline-primary" role="button" href="{% url 'accountbooks:delete' article.pk %}">삭제하기</a>
+    <a class="btn btn-outline-primary" role="button" href="{% url 'accountbooks:copy' article.pk %}">복사하기</a>
+    <a class="btn btn-outline-primary" role="button" href="{% url 'accountbooks:index' %}">뒤로 가기</a>
+  </div>
+{% endblock content %}

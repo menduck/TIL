@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="m-5"><b>📂 가계부 작성</b></h1>
+    <form action="{% url 'accountbooks:update' article.pk %}" method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="note" class="form-label">내용</label>
+        <input type="text" class="form-control" id="note" name="note" value="{{ article.note }}">
+      </div>
+      <div class="mb-3">
+        <label for="category" class="form-label">분류</label>
+        <select class="form-select" aria-label="Default select example" id="category" name="category">
+          <option selected>{{ article.category }}</option>
+          <option value="식비">식비</option>
+          <option value="교통비">교통비</option>
+          <option value="여가비">여가비</option>
+          <option value="쇼핑">쇼핑</option>
+          <option value="병원비">병원비</option>
+          <option value="경조사비">경조사비</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="amount" class="form-label">사용 금액</label>
+        <input type="number" class="form-control" id="amount" min="0" name="amount" value="{{ article.amount }}">
+      </div>
+      <div class="mb-3">
+        <label for="date" class="form-label">사용 날짜</label>
+        <input type="date" class="form-control" id="date" name="date" value="{{ article.date|date:"Y-m-d" }}">
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">메모</label>
+        <textarea class="form-control" id="description" rows="3" name="description">{{ article.description }}</textarea>
+      </div>
+      <input class="btn btn-primary" type="submit" value="가계부 저장">
+    </form>
+  </div>
+{% endblock content %}
