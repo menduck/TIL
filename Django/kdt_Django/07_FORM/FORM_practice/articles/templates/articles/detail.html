@@ -9,7 +9,8 @@
   <p>수정일: {{article.updated_at}}</p>
 
   <a href="{% url 'articles:index' %}">뒤로가기</a>
-  <form action="{% url 'articles:delete' article.pk%}">
+  <form action="{% url 'articles:delete' article.pk%}" method = "POST">
+    {% csrf_token %}
     <input type="submit" value="삭제">
   </form>
 
