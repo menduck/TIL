@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% comment %} 내장된 태그를 가져오는 load / 파이썬의 import {% endcomment %}
+{% load static %} 
+{% block content %}
+  <img src="{% static 'articles/sample-1.png' %}" alt="1번 그림">
+  <img src="{% static 'sample-2.png' %}" alt="2번 그림">
+  <h1>새로운 게시글 만들기</h1>
+  <a href="{% url 'articles:create' %}">NEW</a>
+  <link rel="stylesheet" href=" {% static 'articles/style.css' %}">
+  <h1>게시글 항목</h1>
+  {% for article in articles %}
+    <p>제목: <a href="{% url 'articles:detail' article.pk %}">{{article.title}}</a> </p>
+    <p>내용: {{article.content}} </p>
+  {% endfor %}
+{% endblock content %}
