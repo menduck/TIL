@@ -342,3 +342,281 @@ def comment_delete(request, article_pk, comment_pk):
   </ul>
 ```
 
+# Article과 User
+## 모델 관계 설정
+- Article(N) - User(1)
+  - 0개 이상의 게시글은 1개의 회원에 의해 작성 될 수 있음.
+
+1. User 외래 키 정의
+
+```py
+# articles/models.py
+from django.db import models
+
+# models.py에서 User를 참조할때만 다음과 같이 참조한다.
+from django.conf import settings
+
+class Article(models.Model):
+    # settings.AUTH_USER_MODEL 문자열로 참조
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
+    # title, content 등등
+```
+- User 모델을 참조하는 방법
+  - 직접 참조는 권장하지 않음
+    - from accounts.models import User
+  - 간접 참조 get_user_model은 models.py에선 사용하지 않음. (ex from django.contrib.auth import get_user_model)
+    - 반환 값 : 'User Object' 객체
+    - django 내부 실행 원리로 인해 아직 User 객체를 생성하기 전에 models.py부터 실행되기 때문에
+  - settings.AUTH_USER_MODEL
+    - 반환 값: 'accounts.User' 문자열
+    - modles.py의 모델 필드에서 참조할 때 사용
+
+1-1. migration
+- 기본적으로 모든 컬럼은 NOT NULL 제약 조건이 있기 때문, 데이터가 없이 새로 추가되는 외래 키 필드 user_id가 생성되지 않음
+- 이전에 이미 DB가 있기 때문
+- 그래서 기본값을 어떻게 작성할 건인지 선택해야 함.
+
+## CRUD 구현
+### 1. 게시글 작성자 나타내기
+
+1. ArticleForm 출력 필드 수정
+
+```py
+from django import forms
+from .models import Article
+
+class ArticleForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        # user_id는 사용자에게 받는 것이 아니므로 출력에서 가림
+        fields = ('title','content',)
+```
+
+- 여기까지 작성하고 게시글을 작성하면 ***IntegrityError*** 가 발생한다.
+- 게시글 작성 시 user_id필드를 누락했기 때문이다.
+- view에서 게시글 작성 시 작성자 정보도 함꼐 저장해야 한다.
+
+2. view
+
+```py
+# articles/views.py
+@login_required
+def create(request):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+          # commit을 False로 저장하면 DB에 레코드를 작성하지 않도록 함. 인스턴스로 반환은 가능
+          # 저장하기 전에 잠시 보류 해놓고 article.user에 작성자를 저장한 다음 DB에 저장해야 한다.
+            article = form.save(commit=False)
+            article.user = request.user
+            article.save()
+            return redirect('articles:detail', article.pk)
+    else:
+        form = ArticleForm()
+    context = {
+        'form' : form,
+    }
+    return render(request, 'articles/new.html', context)
+```
+
+3. templates
+
+- 메인페이지에 작성자와 제목 내용 표시하기
+
+```html
+<!-- articles/templates/articles/index.html -->
+
+  {% for article in articles  %}
+    <p>
+      작성자 : {{ article.user.username }}
+    </p>
+    <p>
+      제목 : <a href="{% url 'articles:detail' article.pk%}">{{ article.title }}</a>
+    </p>
+    <p>
+      내용 : {{ article.content }}
+    </p>
+  {% endfor %}
+```
+- article.user.username 값과 article.user값이 같다.
+  - 왜? article.user은 객체가 아닌가? 맞다 하지만
+  - AbstractUser가 아래 코드가 작성되었기 때문에 user객체까지만 호출해도 username이 반환된다.
+
+```py
+# accounts/models.py
+class User(AbstractUser):
+  pass
+
+  # AbstractUser가 아래 코드가 작성되어있음
+  def __str(self):
+    return self.username
+```
+
+### 2. 게시글 작성한 사람만 게시글 수정/삭제 하기
+
+1. view
+
+```py
+@login_required
+def update(request, pk):
+    article = Article.objects.get(pk=pk)
+    # 수정을 요청하는 자 vs 게시글의 작성자를 비교
+    # 같으면 그 아래 수정 코드 실행
+    if request.user == article.user:
+        if request.method == 'POST':
+            form = ArticleForm(request.POST, instance=article)
+            if form.is_valid():
+                form.save()
+                return redirect('articles:index')
+        else:
+            form = ArticleForm(instance=article)
+    # 수정을 요청하는 자가 게시글 작성자와 같지 않다면 index 페이지로 감.
+    else:
+        return redirect('articles:index')
+    context = {
+        'article' : article,
+        'form' : form
+    }
+    return render(request, 'articles/edit.html', context)
+
+
+@login_required
+def delete(request, pk):
+    # 삭제를 요청하는 자 vs 게시글의 작성자를 비교
+    article = Article.objects.get(pk=pk)
+    if request.user == article.user:
+        article.delete()
+    
+    return redirect('articles:index')
+```     
+
+2. template
+
+- 해당 게시글의 작성자가 아니라면, 수정/삭제 버튼을 출력하지 않도록 함.
+
+```html
+<!-- articles/templates/articles/detail.html -->
+{% if request.user == article.user  %}
+    <form action="{% url 'articles:delete' article.pk %}" method='POST'>
+      {% csrf_token %}
+      <input type="submit" value ='삭제'>
+    </form>
+    <a href="{% url 'articles:update' article.pk %}">수정하기</a>
+  {% endif %}
+```
+
+# Comment와 User
+
+## 모델 관계 설정
+- Comment(N) - User(1)
+  - 0개 이상의 댓글은 1개의 회원에 의해 작성 될 수 있음.
+
+1. User 외래 키 정의
+
+```py
+# articles/models.py
+# models.py에서 User를 참조할때만 다음과 같이 참조한다.
+from django.conf import settings
+
+class Comment(models.Model):
+    # 외래 키 필드
+    # DB엔 article_id로 저장됨. 그렇기 때문에 명시적으로 참조하는 모델 클래스 이름의 단수형으로 작성하는 것을 권장함
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
+    # 나머지 필드 생략
+```
+
+2. Migration 진행
+
+- 이전에 Article 와 User 모델 관계 설정 때와 마찬가지로 기존에 존재하던 테이블에 새로운 칼럼이 추가되어야 하는 상황이기 때문에 migrations 파일이 곧바로 만들어지지 않고 일련의 과정이 필요
+- 기본값 설정해줘야 함.
+
+## CRUD 구현
+
+### 1. 로그인한 user가 댓글 남길때 user도 같이 저장하고, 출력하기
+
+- 댓글 작성 시 user_id 필트 데이터가 누락되어 에러 발생
+
+1. view
+
+```py
+# articles/views.py
+@login_required  # 인증된 사용자만 댓글 작성 가능
+def comment_create(request, pk):
+    # 몇 번 게시글인지 조회
+    article = Article.objects.get(pk=pk)
+    # 댓글 데이터를 받아서
+    comment_form = CommentForm(request.POST)
+    # 유효성 검증
+    if comment_form.is_valid():
+        # commit을 False로 주면 인스턴스는 반환하면서도 DB에 레코드는 작성하지 않도록 함
+        comment = comment_form.save(commit=False)
+        comment.article = article
+        comment.user = request.user
+        comment.save()
+        return redirect('articles:detail', pk)
+    context = {
+        'article' : article,
+        # 에러메시지가 포함된 form
+        'comment_form' : comment_form,
+    }
+    # 에러메시지가 출력됨
+    return render(request, 'articles/detail.html', context)
+```
+
+2. templates
+- 세부 페이지에 댓글 작성자 출력
+
+```html
+<!-- articles/templates/articles/detail.html -->
+
+  <h3>댓글조회</h3>
+  <ul>
+    {% for comment in comments  %}
+      <li>
+        {{ comment.user }}: {{ comment.content }}
+      </li>
+    {% endfor %}
+  </ul>
+```
+
+### 3. 댓글 작성한 유저가 댓글 삭제하기
+
+1. view
+
+- 삭제를 요청하려는 사람과 댓글을 작성한 사람을 비교하여 본인 댓글만 삭제할 수 있도록 함.
+
+```py
+# articles/views.py
+@login_required # 인증된 사용자만 댓글 삭제 가능
+def comment_delete(request, article_pk, comment_pk):
+    # 삭제할 댓글을 조회
+    comment = Comment.objects.get(pk = comment_pk)
+    # 삭제를 요청하는 자 vs 댓글의 작성자를 비교
+    if comment.user == request.user:
+        # 댓글 삭제
+        comment.delete()
+    return redirect('articles:detail', article_pk)
+```
+
+2. templates
+-  해당 댓글의 작성자가 아니면, 댓글 삭제 버튼을 출력하지 않도록 함.
+
+```html
+<!-- articles/templates/articles/detail.html -->
+
+    <h3>댓글조회</h3>
+  <ul>
+    {% for comment in comments  %}
+      <li>
+        {{ comment.user }}: {{ comment.content }}
+        {% if comment.user == request.user  %}
+          <form action=" {% url 'articles:comment_delete' article.pk comment.pk %}" method = "POST">
+            {% csrf_token %}
+            <input type="submit" value="삭제">
+          </form>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+```
