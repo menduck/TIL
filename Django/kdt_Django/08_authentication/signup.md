@@ -363,6 +363,7 @@ def signup(request):
 - 인증된 사용자에 대해서만 view함수를 실행시키는 데코레이터
 - 로그인 하지 않은 사용자의 경우 /accounts/login/ 주소로 자동으로 redirect 시킴
 - 아래 코드와 같은 동작
+
 ```py
 if not request.user.is_authenticated:
         return redirect('accounts:login')
