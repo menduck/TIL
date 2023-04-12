@@ -23,11 +23,15 @@
   <a href="{% url 'articles:create' %}">새 게시글 작성하기</a>
   {% for article in articles  %}
     <p>
-      제목 : <a href="{% url 'articles:detail' article.pk%}">{{ article.title }}</a>
+      작성자 : {{ article.user.username }}
+    </p>
+    <p>
+      제목 : <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a>
     </p>
     <p>
       내용 : {{ article.content }}
     </p>
+    <hr>
   {% endfor %}
 
 {% endblock content %}
