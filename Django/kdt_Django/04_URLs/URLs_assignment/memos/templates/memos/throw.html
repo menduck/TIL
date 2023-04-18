@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container mt-5">
+    <label for="inputKeyword" class="form-label">키워드를 입력하세요.</label>
+    <form action="/catch/" method="GET">
+      <div class="row">
+        <div class="col-9">
+          <input type="text" class="form-control" id="inputKeyword" name="word">
+        </div>
+        <div class="col-3">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock content %}

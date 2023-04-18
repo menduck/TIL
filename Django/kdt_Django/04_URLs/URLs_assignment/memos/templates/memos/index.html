@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <a href="{% url 'memos:number_print' 1 %}">1</a>
+  <a href="{% url 'memos:number_print' 2 %}">2</a>
+  <a href="{% url 'memos:number_print' 3 %}">3</a>
+  <a href="{% url 'memos:number_print' 9999 %}">9999</a>
+{% endblock content %}
+
