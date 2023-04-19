@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>새로운 Todo 만들기</h2>
+  <form action="{% url 'todos:new' %}" method = "POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value = '등록'>
+  </form>
+{% endblock content %}

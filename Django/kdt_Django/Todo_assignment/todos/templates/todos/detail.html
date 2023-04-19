@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h1>TodoList</h1>
+  <p>내용: {{todo.content}}</p>
+  <p>카테고리: {{todo.category}}</p>
+  <p> 중요도 : {{todo.priority}}</p>
+  <p>마감일 : {{todo.deadline}}</p>
+  {% if todo.completed %}
+  <p>완료 : O </p>
+  {% else %}
+  <p>완료 : X </p>
+  {% endif %}
+</div>
+<form action="{% url 'todos:delete' todo.pk %}" method="POST">
+  {% csrf_token %}
+  <input type="submit" value ='삭제'>
+</form>
+<a href="{% url 'todos:update' todo.pk%}">수정하기</a>
+<a href="{% url 'todos:index' %}">뒤로가기</a>
+{% endblock content %}

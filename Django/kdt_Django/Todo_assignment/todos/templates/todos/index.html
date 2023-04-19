@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <h1>Todo-List</h1>
+  <ul>
+    {% for todo in todos %}
+    <li>
+      <form action="{% url 'todos:completed' todo.pk %}" method="POST">
+        {% csrf_token %}
+      {% if todo.completed %}
+        <input type="submit" value="🌕" name='completed'>  
+        <a href="{% url 'todos:detail' todo.pk %}" style = 'text-decoration:line-through'>{{todo.content}}</a>
+        {% else %}
+        <input type="submit" value="🌑" name='completed'>       
+        <a href="{% url 'todos:detail' todo.pk %}">{{todo.content}}</a>
+      </form>
+      {% endif %}
+    </li>
+    <br>
+    <br>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'todos:new' %}">새로운 일정 등록</a>
+</div>
+{% endblock content %}
