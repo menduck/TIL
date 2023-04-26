@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ user.username }}의 프로필 페이지</h1>
+  <h3>{{ user.username }}가 작성한 모든 게시글</h3>
+    {% for article in person.article_set.all %} 
+      <p>제목: {{ article.title }} </p>
+    {% endfor %}
+
+  <h3>{{ user.username }}가 작성한 모든 댓글</h3> 
+    {% for  in person. %}{% endfor %}
+  <h3>{{ user.username }}가 좋아요를 누른 모든 게시글</h3> 
+  
+{% endblock content %}
