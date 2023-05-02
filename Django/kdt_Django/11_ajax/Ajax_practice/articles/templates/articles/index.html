@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+  <h3>안녕하세요 {{ user }}님</h3> 
+  <form action="{% url 'accounts:logout' %}" method = "POST">
+    {% csrf_token %}
+    <input type="submit" value = '로그아웃'>
+  </form>
+  
+  <form action="{% url 'accounts:delete' %}" method = "POST">
+    {% csrf_token %}
+    <input type="submit" value ="계정탈퇴">
+  </form>
+  <a href="{% url 'accounts:update' %}">회원정보수정</a>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">로그인</a>
+    <a href="{% url 'accounts:signup' %}">회원가입</a>
+  {% endif %}
+
+
+  <h2>게시글</h2>
+  <a href="{% url 'articles:create' %}">새 게시글 작성하기</a>
+  {% for article in articles  %}
+    <p>
+      작성자 : {{ article.user.username }}
+    </p>
+    <p>
+      제목 : <a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a>
+    </p>
+    <p>
+      내용 : {{ article.content }}
+    </p>
+    <form action="{% url 'articles:likes' article.pk%}" method="POST">
+      {% csrf_token %}
+      {% if request.user in article.like_users.all %}
+      <p><input type="submit" value='♥'> - {{article.like_users.all.count}} </p>
+      {% else %}
+      <p><input type="submit" value='♡'> - {{article.like_users.all.count}} </p>
+      {% endif %}
+    </form>
+    <hr>
+  {% endfor %}
+
+{% endblock content %}

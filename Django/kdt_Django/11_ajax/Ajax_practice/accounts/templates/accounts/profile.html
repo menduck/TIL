@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block content %}
+<h1>{{ user.username }}의 프로필 페이지</h1>
+<h3>{{ user.username }}가 작성한 모든 게시글</h3>
+{% for article in person.article_set.all %}
+<p>제목: {{ article.title }}</p>
+{% endfor %}
+
+<h3>{{ user.username }}가 작성한 모든 댓글</h3>
+<h3>{{ user.username }}가 좋아요를 누른 모든 게시글</h3>
+
+<div>
+  팔로잉 : <span id="followings-count">{{ person.followings.all|length }}</span> / 팔로워 : <span id="followers-count">{{ person.followers.all|length }}</span>
+</div>
+
+{% if request.user != person %}
+<div>
+  <form id="follow-form" data-user-id="{{ person.pk }}">
+    {% csrf_token %} 
+    {% if request.user in person.followers.all %}
+    <input type="submit" value="언팔로우" />
+    {% else %}
+    <input type="submit" value="팔로우" />
+    {% endif %}
+  </form>
+</div>
+{% endif %}
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const form = document.querySelector("#follow-form")
+  const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value
+  form.addEventListener("submit", function (event) {
+    //이벤트 기본 동작 취소 => submit의 기본 동작인 url로 가는것을 방지
+    event.preventDefault()
+
+    // event.target은 변수 form
+    // form의 속석 값인 data-변수명 (-은 대문자로 구분)
+    const userId = event.target.dataset.userId;
+    //axios로 요청 보내기
+    axios({
+      method: "post",
+      url: `/accounts/${userId}/follow/`,
+      headers: { "X-CSRFToken": csrftoken },
+    }).then((response) => {
+      const isFollowed = response.data.is_followed
+      const followBtn = document.querySelector('#follow-form > input[type=submit]')
+
+      if(isFollowed){
+        followBtn.value='언팔로우'
+      } else{
+        followBtn.value='팔로우'
+      }
+
+      const followingCountTag = document.querySelector('#followings-count')
+      const followersCountTag = document.querySelector('#followers-count')
+
+      const followingsCountData = response.data.followings_count
+      const followersCountData = response.data.followers_count
+
+      followingCountTag.textContent = followingsCountData
+      followersCountTag.textContent = followersCountData
+    });
+  });
+</script>
+{% endblock content %}
