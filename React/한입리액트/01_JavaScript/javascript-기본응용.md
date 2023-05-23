@@ -211,3 +211,179 @@ asyncAdd(1, 3, (res) => {
 
 - Callback Queue
   - cb()는 Event Loop을 통해 Call Stack으로 넘어감
+
+# promise
+
+- 콜백 지옥의 예
+```js
+function taskA(a, b, cb) {
+  setTimeout(() => {
+    const res = a + b;
+    cb(res);
+  }, 3000);
+}
+
+function taskB(a, cb) {
+  setTimeout(() => {
+    const res = a * 2;
+    cb(res);
+  }, 1000);
+}
+
+function taskC(a, cb) {
+  setTimeout(() => {
+    const res = a * -1;
+    cb(res);
+  }, 2000);
+}
+
+taskA(3, 4, (a_res) => {
+  console.log('taskA : ', a_res); // 7
+  taskB(a_res, (b_res) => {
+    console.log('taskB : ', b_res); // 14
+    taskC(b_res, (c_res) => {
+      console.log('taskC : ', c_res); // -1
+    });
+  });
+});
+```
+
+- promist 객체를 반환하는 함수를 만든 것은
+  - 비동기 처리된 결과값을 then과 catch로 이용할 수 있게 만들기 위해서
+
+```js
+function taskA(a, b) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const res = a + b;
+      resolve(res);
+    }, 3000);
+  });
+}
+
+function taskB(a) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const res = a * 2;
+      resolve(res);
+    }, 1000);
+  });
+}
+
+function taskC(a, cb) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const res = a * -1;
+      resolve(res);
+    }, 2000);
+  });
+}
+
+// 콜백함수를 활용하는 것은 다시 콜백지옥을 만드는 것과 같음
+taskA(5, 1).then((a_res) => {
+  console.log('A result: ', a_res);
+  taskB(a_res).then((b_res) => {
+    console.log('B result: ', b_res);
+    taskC(b_res).then((c_res) => {
+      console.log('C result: ', c_res);
+    });
+  });
+});
+
+
+// then chaining
+taskA(5, 1)
+  .then((a_res) => {
+    console.log('A result: ', a_res);
+    return taskB(a_res);
+    // 여기까지 taskB를 반환받은 promise 객체
+  })
+  .then((b_res) => {
+    console.log('B result: ', b_res);
+    return taskC(b_res);
+    // 여기까지 taskC를 받환받은 promise객체
+  })
+  .then((c_res) => {
+    console.log('C result: ', c_res);
+  });
+```
+
+- 비동기 호출하는 코드와 결과를 처리하는 코드를 분리할 수 있음. 
+
+```js
+const bPromiseResult = taskA(5, 1)
+  .then((a_res) => {
+    console.log('A result: ', a_res);
+    return taskB(a_res);
+    // 여기까지 taskB를 반환받은 promise 객체
+  })
+
+console.log('중간에 낀 코드들')
+// some code
+  
+bPromiseResult.then((b_res) => {
+    console.log('B result: ', b_res);
+    return taskC(b_res);
+    // 여기까지 taskC를 받환받은 promise객체
+  })
+  .then((c_res) => {
+    console.log('C result: ', c_res);
+  });
+```
+
+# async & await 
+
+- async
+  - function 앞에 위치.
+  - 함수의 반환값으로 항상 promise를 반환함
+  - 프라미스가 아닌 값을 반환하더라도 이행 상태의 프라미스(resolved promise)로 값을 감싸 이행된 프라미스가 반환함.
+
+```js
+function hello() {
+  return 'hello';
+}
+
+// promise 객체로 반환함.
+// 리턴값은 promise 객체의 resolve의 값이 됨
+async function helloAsync() {
+  return 'hello Async';
+}
+
+helloAsync().then((res) => {
+  console.log(res) // hello Async
+})
+```
+
+- await
+  - async 함수 안에서만 동작함.
+  - promise가 처리될 때까지 함수 실행을 기다림 => 마치 동기적인 것처럼
+  - 기다리는 동안에 엔진이 다른 일을 처리할 수 있기 때문에 CPU 리소스가 낭비되지 않음.
+
+
+```js
+function delay(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+// async function helloAsync() {
+//   return delay(3000).then(() => {
+//     return 'hello Async';
+//   });
+// }
+
+// await 활용
+async function helloAsync() {
+  // 마치 동기적으로 수행되는 것처럼 작동됨.
+  await delay(3000);
+  return 'hello Async';
+}
+
+helloAsync().then((res) => {
+  console.log(res); // hello Async
+});
+```
+
+
+[출처: [코어자바스크립트](https://ko.javascript.info/async-await)]
