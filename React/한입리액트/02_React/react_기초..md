@@ -131,3 +131,137 @@ export default Counter;
 - 하나의 컴포넌트에 여러 개의 State를 가져도 된다.
 
 # Props
+
+- 컴포넌트끼리 값을 전달하는 수단
+
+```js
+// App.js
+function App() {
+  return (
+    <div className="App">
+      <MyHeader />
+      {/* Props로 components에 데이터를 전달함 */}
+      <Counter initialValue={5} a={4} />
+
+      <MyFooter />
+    </div>
+  );
+}
+
+export default App;
+
+// Counter.js
+const Counter = (props) => {
+  console.log(props); // 객체로 받음 { a : 4,  initialValue :  5}
+
+  const [count, setCount] = useState(props.initialValue);
+
+  const onIncrease = () => {
+    setCount(count + 1);
+  };
+
+  const onDecrease = () => {
+    setCount(count - 1);
+  };
+  return (
+    <div>
+      <h2>{count}</h2>
+      <button onClick={onDecrease}>-</button>
+      <button onClick={onIncrease}>+</button>
+    </div>
+  );
+};
+```
+
+- Props의 값이 많을 때
+  - spread 연산자를 통해 객체로 데이터를 넘겨주고
+  - 비구조화 할당으로 받을 값만 데이터를 받을 수 있다.
+
+- Props의 기본값을 설정도 가능
+  - 부모 컴포넌트에서 값을 설정하지 않을 경우 에러를 방지할 수 있음
+
+```js
+// App.js
+function App() {
+  const counterProps = {
+    a: 1,
+    b: 2,
+    c: 3,
+    initialValue: 10,
+  };
+  return (
+    <div className="App">
+      <MyHeader />
+      {/* props가 많을 때 객체를 스프레드 연산자로 데이터를 전달 가능 */}
+      <Counter {...counterProps} />
+      <MyFooter />
+    </div>
+  );
+}
+
+// 기본값 설정
+// 부모 컴포넌트에서 데이터를 넘겨주지 않을 때 기본 prop값을 설정해주어 에러를 방지
+Counter.defalutProps ={
+  initialValue: 0
+}
+
+// Counter.js
+
+// 비구조화 할당으로 받을 수 있음
+const Counter = ({initialValue}) => {
+  const [count, setCount] = useState(initialValue);
+
+  const onIncrease = () => {
+    setCount(count + 1);
+  };
+
+  const onDecrease = () => {
+    setCount(count - 1);
+  };
+  return (
+    <div>
+      <h2>{count}</h2>
+      <button onClick={onDecrease}>-</button>
+      <button onClick={onIncrease}>+</button>
+    </div>
+  );
+};
+```
+
+- 컴포넌트도 props로 전달 가능
+
+```js
+// Container.js
+const Container = ({ children }) => {
+  return (
+    // 자식 요소를 div로 감싼다
+    <div style={{ margin: 20, padding: 20, border: '1px solid gray' }}>
+    // 자식요소
+      {children}
+    </div>
+  );
+};
+export default Container;
+
+// App.js
+function App() {
+  const counterProps = {
+    a: 1,
+    b: 2,
+    c: 3,
+    initialValue: 10,
+  };
+  return (
+    <Container>
+      <Counter {...counterProps} />
+    </Container>
+  );
+}
+```
+
+
+## 컴포넌트가 리렌더링 되는 시점
+1. 본인이 관리하는 State가 바뀔 때마다
+2. props가 바뀔 때마다
+3. 내 부모가 리렌더링 될 때
+
