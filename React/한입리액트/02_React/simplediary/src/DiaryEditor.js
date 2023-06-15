@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 
 // 작성자, 일기 본문, 감정 점수를 입력받는 컴포넌트
-const DiaryEditor = () => {
+const DiaryEditor = ({ onCreate }) => {
   // 동작이 비슷한 state이기 때문에 하나의 state로 묶을 수 있음.
   // const [author, setAuthor] = useState('');
   // const [content, setContent] = useState('');
@@ -31,6 +31,12 @@ const DiaryEditor = () => {
       return;
     }
 
+    onCreate(state.author, state.content, state.emotion);
+    setState({
+      author: "",
+      content: "",
+      emotion: ""
+    })
     alert('저장 성공');
   };
 
