@@ -1,4 +1,5 @@
 import {useState} from "react";
+import Toggle from "./Toggle";
 
 function LoginItem() {
   const [inputs, setInputs] = useState({
@@ -59,6 +60,18 @@ function LoginItem() {
               X
             </div>
           )}
+        </div>
+      </div>
+      <div className="login_keep_wrap">
+        <div className="keep_check">
+          <input type="checkbox"></input>
+          <label className="keep_text">로그인 상태 유지</label>
+        </div>
+        <div className="ip_check">
+          <a href="https://nid.naver.com/login/ext/help_ip3.html">
+            <span className="ip_text">IP보안</span>
+          </a>
+          <span class="toggle"><Toggle /></span>
         </div>
       </div>
       <div className="btn_login_wrap">
