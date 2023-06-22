@@ -11,6 +11,12 @@ function LoginItem() {
   const [isPasswordFocus, setPasswordFocus] = useState(false);
   const { id, password } = inputs;
 
+  const [checked, setChecked] = useState(false);
+
+  const checkHandler = () =>{
+    setChecked(!checked)
+  }
+
   const handlechange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
@@ -64,14 +70,14 @@ function LoginItem() {
       </div>
       <div className="login_keep_wrap">
         <div className="keep_check">
-          <input type="checkbox"></input>
+          <input type="checkbox" onChange={checkHandler} />
           <label className="keep_text">로그인 상태 유지</label>
         </div>
         <div className="ip_check">
           <a href="https://nid.naver.com/login/ext/help_ip3.html">
             <span className="ip_text">IP보안</span>
           </a>
-          <span class="toggle"><Toggle /></span>
+          <span className="toggle"><Toggle /></span>
         </div>
       </div>
       <div className="btn_login_wrap">
