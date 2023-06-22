@@ -8,14 +8,14 @@ function OnetimeLoginItem() {
     setOnetimeNum(e.target.value)
   }
 
-  const handleOnDelete = () => {
+  const handleDelete = () => {
     setOnetimeNum('')
   }
 
   return (
     <>
     <div className="help_text">
-      네이버앱의 메뉴 > 설정  > 로그인 아이디 관리 > 더보기  > 일회용 로그인 번호에 보이는 번호를 입력해 주세요.
+      네이버앱의 메뉴 {">"} 설정  {">"} 로그인 아이디 관리 {">"} 더보기  {">"} 일회용 로그인 번호에 보이는 번호를 입력해 주세요.
     </div>
     <div className={`input_row ${isOnetimeNumFocus ? 'focus' : ''}`}>
           <input
@@ -29,7 +29,7 @@ function OnetimeLoginItem() {
             value={onetimeNum}
           />
           {onetimeNum && (
-            <div className="btn_delete" onClick={handleOnDelete}>
+            <div className="btn_delete" onClick={handleDelete}>
               X
             </div>
           )}
