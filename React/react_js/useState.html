@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script>
+      // 각 컴포넌트별 고유한 key값
+      let currentStateKey = 0;
+      // states 배열
+      const states = []
+
+      function useState(initialState) {
+        const key = currentStateKey
+        // 초기값
+        if (states.length === currentStateKey) {
+          states.push(initialState)
+        }
+        const state = states[key]
+
+        function setState(newState) {
+          // 각 key에 value값인 state값을 업데이트함.
+          states[key] = typeof newState === 'function' ? newState(state) : newState;
+
+          render();
+        }
+
+        currentStateKey += 1
+        return [state, setState];
+      }
+
+      function Counter() {
+        const [count, setCount] = useState(0);
+
+        window.increment = () => {
+          setCount(prevCount => prevCount + 1);
+          console.log(states)
+        };
+        
+        return `
+        <div>${count}</div>
+        <button onclick='increment()'>Increment</button>
+        `;
+      }
+      
+      function ChangeClick() {
+        const [isclick, setIsClick] = useState(true);
+        
+        window.clickhandler = () => {
+          setIsClick(!isclick)
+          console.log(states)
+        }
+        return `
+        <div>${isclick}</div>
+        <button onclick='clickhandler()'>click me!</button>
+        `;
+      }
+
+      function render() {
+        const root = document.getElementById('root');
+        root.innerHTML = `<div>${Counter()}${ChangeClick()}</div>`;
+        // 랜더링 될때마다 현재 key값을 초기화 시켜줘야 함.
+        currentStateKey = 0;
+      }
+
+      render();
+    </script>
+  </body>
+</html>
